@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/friendbook</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.c3p0.max_size">25</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping class="com.nura.entity.UserLikes"/>
+    <mapping class="com.nura.entity.UserDetails"/>
+    <mapping class="com.nura.entity.UserPost"/>
+    <mapping class="com.nura.entity.EducationDtls"/>
+    <mapping class="com.nura.entity.WorkDtls"/>
+    <mapping class="com.nura.entity.DetailsAboutU"/>
+    <mapping class="com.nura.entity.ContactInfo"/>
+    <mapping class="com.nura.entity.LifeEventsDtls"/>
+    <mapping class="com.nura.entity.PlacesULived"/>
+    <mapping class="com.nura.entity.RecommendFriends"/>
+    <mapping class="com.nura.entity.FriendsList"/>
+    <mapping class="com.nura.entity.VulgarWordMgr"/>
+    <mapping class="com.nura.entity.UserProfileDetails"/>
+    <mapping class="com.nura.entity.UserPostLikes"/>
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,410 @@
+ <%--
+    Document   : AccCreation
+    Created on : Oct 12, 2011, 3:31:23 PM
+    Author     : rr100345
+--%>
+
+<%@ page import="java.sql.Connection,java.sql.ResultSet,java.sql.Statement,java.sql.PreparedStatement,java.sql.DriverManager,java.sql.SQLException"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.*" %>
+<%@ page import="java.util.Random,Pack.*" language="java"%>
+<%@page contentType="text/html" session="true"  pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Pastel Co. by Free Css Templates</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script type='text/javascript' id="s1" src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=3.0.1'></script>    
+<script type='text/javascript' id="s2" src='js/infinite-rotator.js'></script>
+<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" id="s3">
+
+function getP(){
+	   if(document.getElementById("accounttype").value == "Joint"){
+
+			 document.getElementById("gnameId").style.display="inline";
+		 }else{
+
+			 document.getElementById("gnameId").style.display="none";
+		 }
+		 
+    
+
+}
+</script>
+</head>
+<body>
+   
+
+  
+<div id="header">
+	
+	<div id="menu">
+		<ul>
+			<li class="active"><a href="index.jsp" title="">Account</a></li>
+			<!--<li><a href="Aboutus.jsp" title="">Credit</a></li>
+			<li><a href="contactus.jsp" title="">Loan</a></li>-->
+			
+                 </ul>
+        </div>
+    <div id="log">
+        <ul id="log1">
+            <li class="active"> <a href="index.jsp" style="color: #FFFFFF;margin-left: 75px;"></a>
+                                <a href="index.jsp" style="color: #FFFFFF;"></a> </li>
+        </ul>
+    </div>
+                   
+            
+</div>
+<div id="content">         
+	<div id="sidebar">
+		<div id="support">
+			<h2>Bank</h2>
+			<h3>Since 2018</h3>
+		</div>
+		<div id="login" class="boxed">
+			<h2 class="title"></h2>
+			<div class="content">
+				<p>
+				</p>
+				<br>
+			</div>
+		</div>
+            <div id="updates" class="boxed">
+			<h2 class="title">Recent Updates</h2>
+			<div class="content">
+				<ul>
+					<li>
+						<h3>Jan 6, 2018</h3>
+						<p><a href="#">In posuere eleifend odio quisque semper augue mattis wisi maecenas ligula&#8230;</a></p>
+					</li>
+					<li>
+						<h3>Jan 9, 2018</h3>
+						<p><a href="#">Quisque dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh&#8230;</a></p>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+
+            
+		
+	</div>
+    </div>
+   
+	<div id="main">
+		
+<div id="swelcome">
+    <p><img src="images/img-04.jpg" alt="1" class="rotating-item" width="472" height="232" style="margin-left: 600px;margin-top:125px;"   /></p>
+ <p><img src="images/img-01.jpg" alt="2" class="rotating-item" width="472" height="232" style="margin-left:600px;margin-top:125px;"   /></p>
+ <p><img src="images/img-03.jpg" alt="3"  class="rotating-item" width="472" height="232" style="margin-left:600px;margin-top:125px;"   /></p>
+ <p><img src="images/img-05.jpg" alt="4"  class="rotating-item" width="472" height="232" style="margin-left: 600px; margin-top:125px;"   /></p>
+</div>
+</div>
+
+<div align="center" style="margin-top:250px;margin-left:-400px">
+    
+
+	<p>
+
+	
+        <%@ include file = "DBConn.jsp"%>
+	
+	<%! //String groupname = "";
+	    //String grouppass = "";
+		//long accno = 0;
+	%>
+	<%
+	   try{
+		   String u = (String)session.getAttribute("u"); //request.getParameter("u");
+                   out.println(u);
+		   String pa = (String)session.getAttribute("u");//request.getParameter("password1");*/
+		   String address = request.getParameter("address");
+		  String email = (String)session.getAttribute("u");//request.getParameter("email");*/
+           String accnumber = null;//request.getParameter("accnumber");
+		   String pinnumber = null;//request.getParameter("pinnumber");
+		   String acctype =null; //request.getParameter("accounttype");
+		   String initamount =(String)session.getAttribute("u"); //request.getParameter("iniamt");
+		   //String accountPerson = request.getParameter("aperson");
+		  String country = (String)session.getAttribute("u");//request.getParameter("country");
+		   String state = (String)session.getAttribute("u");//request.getParameter("state");
+		   //String bname = request.getParameter("branch");
+		   //String district = request.getParameter("district");
+		  // String pincode = request.getParameter("pincode");*/
+		    String card1="no";
+			   card1 = request.getParameter("check");
+		   String card2="no";
+			   card2 = request.getParameter("check1");
+		   int cstatus=0;
+		   int dstatus=0;
+			
+		   
+			  // if(card1 != null)
+				//   cstatus=1;
+			   //if(card2 != null)
+				 //  dstatus=1;
+		   
+
+		  
+		   String ccno="empty";
+		   String dcno="empty";
+		   String accno="empty";
+		   String pin="empty";
+		   int ccpin=0;
+		   int dcpin=0;
+		   long tac=0;
+		   System.out.println("james");
+		    
+			
+			rs1 =  stmt.executeQuery("select * from acccreation where username='"+u+"'");
+			System.out.println("james");
+			if(rs1.next()){
+				 out.println("<br>User Name already exits<br><a href=umenu.jsp>Click Here to Menu</a>");
+				 
+			}else{
+				
+			
+		  
+			rs=stmt.executeQuery("select * from accCreation");
+		   while(rs.next()){
+			accnumber = rs.getString(15);
+		   }
+		   if(accnumber == null){
+			   accnumber = "23145677";
+		   }
+		   System.out.println("james......."+accnumber);
+		   tac=Integer.parseInt(accnumber);
+			if(tac == 0){
+				accnumber = "23145678";
+			}else{
+				tac = tac+1;
+				accnumber = String.valueOf(tac);
+			}
+			//double j=Math.floor(Math.random()*44444);
+			//int k=(int)j;
+			//pinnumber=String.valueOf(k);
+			String sessionkey1 = "";
+					int NUM_CHARS1 = 4;
+					String chars1="1234567890";
+    
+					try{
+						Random r1 = new Random();
+						char[] buf1 = new char[NUM_CHARS1];
+						for (int i1 = 0; i1 < buf1.length; i1++){
+						buf1[i1] = chars1.charAt(r1.nextInt(chars1.length()));
+					}
+					sessionkey1 = new String(buf1);
+					pinnumber=sessionkey1;
+					}
+   
+
+	
+					catch(Exception ex){
+						ex.printStackTrace();
+						out.println(ex);
+
+					}
+		    System.out.println("Testing......."+accnumber +"........card1..."+card1+".....card2...."+card2);
+		   if(card1 != null && card1.equals("credit")){
+			   rs.last();
+			   System.out.println("Credit card");
+			  do{
+				int t=rs.getInt(17);
+				if(t==1){
+				  ccno=rs.getString(18);
+				  //ccpin=rs.getInt(19)+3;
+					//double x=Math.floor(Math.random()*44444);
+					//ccpin=(int)x;
+					//pinnumber=String.valueOf(k);
+					String sessionkey = "";
+					int NUM_CHARS = 4;
+					String chars="1234567890";
+    
+					try{
+						Random r = new Random();
+						char[] buf = new char[NUM_CHARS];
+						for (int i = 0; i < buf.length; i++){
+						buf[i] = chars.charAt(r.nextInt(chars.length()));
+					}
+					sessionkey = new String(buf);
+					ccpin=Integer.parseInt(sessionkey);
+					}
+   
+
+	
+					catch(Exception ex){
+						ex.printStackTrace();
+						out.println(ex);
+
+					}
+				  
+				  break;
+				}
+			   }while(rs.previous());
+
+				cstatus=1;
+				//ccno=rs.getString(18);
+				int t = Integer.parseInt(ccno);
+				t++;
+				ccno=String.valueOf(t);
+				System.out.println("credit....");
+				
+
+		   }
+		   if(card2 != null && card2.equals("debit")){
+			   rs.last();
+			   do{
+				int t=rs.getInt(20);
+				
+				if(t==1){
+					String test=rs.getString(1);
+					System.out.println("test...."+test);
+				  dcno=rs.getString(21);
+				  System.out.println("debit...."+dcno);
+				  //double x=Math.floor(Math.random()*44444);
+				  //dcpin=(int)x;
+				 String sessionkey = "";
+					int NUM_CHARS = 4;
+					String chars="1234567890";
+    
+					try{
+						Random r = new Random();
+						char[] buf = new char[NUM_CHARS];
+						for (int i = 0; i < buf.length; i++){
+						buf[i] = chars.charAt(r.nextInt(chars.length()));
+					}
+					sessionkey = new String(buf);
+					dcpin=Integer.parseInt(sessionkey);
+					}
+   
+
+	
+					catch(Exception ex){
+						ex.printStackTrace();
+						out.println(ex);
+
+					}
+				  break;
+				}
+			   }while(rs.previous());
+			    dstatus=1;
+				//dcno=rs.getString(21);
+				System.out.println("debit...."+dcno);
+				int x = Integer.parseInt(dcno);
+				x++;
+				System.out.println("debit...."+x);
+				dcno=String.valueOf(x);
+				//dcpin=rs.getInt(22)+3;
+				System.out.println("debit....");
+		   }
+		    
+
+		   
+		  /* int k = (int)(Math.random() * 8847D);
+		  // out.println("Value of K..."+k);
+		   String pinnumber = Integer.toString(k);
+		   int j = (new Double(Math.random() * 100000D)).intValue();
+           String accnumber = (new StringBuilder()).append("SBI").append(j).toString();*/
+		 //  out.println(accnumber);
+
+		/*rs = stmt.executeQuery("select accnumber from accCreation");
+		while(rs.next()){
+			accno = rs.getLong("accnumber");
+		}
+		if(accno == 0){
+			accno = 23145678;
+		}else{
+				accno = accno+1;
+			}*/
+			
+			    
+				String d1="empty";
+				String d11="";
+				String d2="";
+				String d3="";
+				String d4="empty";
+				String d22="empty";
+				String d222="empty";
+				String d33="empty";
+				int creditamt=0;
+				Date date=new Date();
+				if(cstatus==1){
+					 d2="10-";
+					 d3="20-";
+					d1=new SimpleDateFormat("dd-MM-yy").format(date);
+					d11=new SimpleDateFormat("dd").format(date);
+					d22=new SimpleDateFormat("MM").format(date);
+					d222=new SimpleDateFormat("MM").format(date);
+					d33=new SimpleDateFormat("yy").format(date);
+					int dm=Integer.parseInt(d11);
+					if(dm>10){
+						int t=Integer.parseInt(d22);
+						t++;
+						d22=Integer.toString(t);
+					}
+					if(dm>20){
+						int t=Integer.parseInt(d222);
+						t++;
+						d222=Integer.toString(t);
+						
+					}
+
+					d2=d2+d22+"-"+d33;
+					d3=d3+d222+"-"+d33;
+					creditamt=100000;
+				}
+				if(dstatus==1){
+					
+					d4=new SimpleDateFormat("dd-MM-yy").format(date);
+					//d1= date.toString();
+					System.out.println("date......"+d4);				
+					
+				}
+				
+				//int creditbal=100000;
+				
+				
+				//String t=new SimpleDateFormat("hh:mm:ss aa").format(date);
+				//out.println(d);
+				//out.println("<br>Time is:");
+				//out.println(t);
+                               String ots=(String)session.getAttribute("ots");
+                                       String otp=request.getParameter("otp");
+			//out.println("ots:"+ots+"otp:"+otp);
+                        if(ots.equals(otp))
+                        {
+                            //stmt.executeUpdate("insert into accCreation (email) values('"+u+"')");
+                                    out.println("Account No:"+accnumber);
+			  out.println("<br>Pin No:"+pinnumber);
+                           out.println("<br>Successfully inserted<br><a href=umenu.jsp>Click Here to Menu</a>");
+                        }
+                        else
+                        {
+                             out.println("<br>Not inserted OTP Mismatched<br><a href=umenu.jsp>Click Here to Menu</a>");
+                        }
+			}
+
+
+	  }catch(Exception ex){
+		ex.printStackTrace();
+		System.out.println(ex);
+	  }
+	  finally{
+		// rs.close();
+		//  rs1.close();
+	  }
+	%>
+	  
+        </p>
+             
+ </body>
+</html>

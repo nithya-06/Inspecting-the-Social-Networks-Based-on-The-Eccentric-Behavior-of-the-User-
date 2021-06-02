@@ -1,0 +1,157 @@
+   <%-- 
+    Document   : viewUserDetails
+    Created on : Oct 13, 2011, 4:12:12 PM
+    Author     : RR100345
+--%>
+
+<%@page import="java.util.Vector"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates 
+http://www.freecsstemplates.org 
+Released for free under a Creative Commons Attribution 2.5 License 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+<title>Pastel Co. by Free Css Templates</title>
+<meta name="keywords" content="" /> 
+<meta name="description" content="" /> 
+<%
+String userid=(String)session.getAttribute("USERNAME");
+%>
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=3.0.1'></script>     
+<script type='text/javascript' src='js/infinite-rotator.js'></script> 
+<link href="default.css" rel="stylesheet" type="text/css" media="screen" /> 
+<script>
+  function validate(){
+	  if(document.form1.accno.value == ""){
+		  alert("Please Enter Account no.");
+		document.form1.accno.focus();
+		return false;
+	  }if(document.form1.pin.value == ""){
+		  alert("Please enter Pin No.");
+		  document.form1.pin.focus();
+		  return false;
+	  }
+	  return true;
+}
+</script>
+    </head> 
+<body> 
+   
+     <div id="header"> 
+	
+      <div id="menu"> 
+ 	<ul>
+ 	 		<li class="active"><a href="index.jsp" title="">Clidit</a></li> 
+			<!--<li><a href="Aboutus.jsp" title="">Credit</a></li> 
+			<li><a href="contactus.jsp" title="">Loan</a></li>-->
+			
+                 </ul>
+        </div>
+    <div id="log">
+        <ul id="log1">
+            <li class="active"> <a href="umen.jsp" style="color: #FFFFFF;margin-left: 75px;">Back</a> 
+                                <a href="index.jsp" style="color: #FFFFFF;"></a> </li>
+        </ul>
+    </div>
+                   
+            
+</div>
+<div id="content">
+	<div id="sidebar">
+		<div id="support">
+			<h2>Bank</h2>
+			<h3>Since 2018</h3>
+		</div>
+	 <div id="login" class="boxed"> 
+	 <h2 class="title">login</h2> 
+         	  <div class="content"> 
+			  <br>
+			  <h3><a href="creditView.jsp">Credit card</h3>
+			  <h3><a href="debitView.jsp">Debit card</h3>
+			  <br>
+				</div>
+  </div>
+            <div id="updates" class="boxed"> 
+		 <h2 class="title">Recent Updates</h2> 
+	  <div class="content"> 
+				<ul>
+					<li>
+					<h3>Jan 6, 2018</h3>
+			 <p><a href="#">In posuere eleifend odio quisque semper augue mattis wisi maecenas ligula&#8230;</a></p>
+                                    </li>
+                                     <li>
+                                            <h3>Jan 9, 2018</h3>
+                                            <p><a href="#">Quisque dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh&#8230;</a></p>
+                                         </li>
+					
+                                    </ul>
+                                   </div>
+                  </div>
+
+            
+		
+           </div> 
+        </div> 
+   
+            <div id="main">
+		
+   <div id="welcome">
+      <p><img src="images/img-04.jpg" alt="1" class="rotating-item" width="472" height="232" style="margin-left: 600px;margin-top:125px;"   /></p>
+   <p><img src="images/img-01.jpg" alt="2" class="rotating-item" width="472" height="232" style="margin-left:600px;margin-top:125px;"   /></p>
+  <p><img src="images/img-03.jpg" alt="3"  class="rotating-item" width="472" height="232" style="margin-left:600px;margin-top:125px;"   /></p>
+   <p><img src="images/img-05.jpg" alt="4"  class="rotating-item" width="472" height="232" style="margin-left: 600px; margin-top:125px;"   /></p>
+</div>
+</div>
+   <%@ include file="DBConn.jsp"%>
+	<%
+	   try{
+		    String uname = (String)session.getAttribute("USERNAME");
+			//String accnumber = (String)session.getAttribute("ACCNUMBER");
+		  rs =  stmt.executeQuery("select * from acccreation where username='"+uname+"'");
+	  }catch(Exception ex){
+		  ex.printStackTrace();
+		  System.out.println(ex);
+	  }
+
+	  
+	  %>
+
+<div align="center" style="margin-top:250px;margin-left:-400px;">
+    
+    <div id="hideshow">
+        <div> 
+            <div> <label for="View Details">View Details </label> </div>
+        </div>    
+        <div>
+
+
+	<p>
+	  <form action="viewUserInformatio.jsp" name="form1">
+	  <table>
+
+		<tr><td>Account No:</td><td><input type = "text" values= "accno" name="accno"></td></tr>
+		<tr><td>      Name:</td><td><input type = "text" values= "pin" name="pin"></td></tr>
+		<tr><td><input type="submit" values="submit" name="submit" onClick="return validate();"></td></tr>
+
+		
+	  </table>
+	  </form>
+
+	</p>
+              
+                                                         
+        
+  </div>
+</div>    
+    
+
+
+
+
+</body>
+</html>
